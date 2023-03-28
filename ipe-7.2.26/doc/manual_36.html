@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<!-- XML file produced from file: manual.tex
+     using Hyperlatex v 19.01 (c) Otfried Cheong
+     on Emacs 26.3, Sat Jul 16 15:56:45 2022 -->
+<head>
+<title>Ipe Manual -- 7.2 Using Xetex</title>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,
+    initial-scale=1" /><link rel="stylesheet" href="manual.css" />
+<style type="text/css">
+.tex-maketitle { text-align: center; }
+div.tex-abstract { margin-left: 20%; margin-right: 10%; }
+h3.tex-abstract  { text-align: center; }
+div.tex-verse, div.tex-quote, div.tex-quotation, div.tex-math {
+  margin-left : 10%; 
+  margin-right : 10%;
+}
+.tex-normalsize { font-size: medium; }
+.tex-large { font-size: large; }
+.tex-Large { font-size: x-large; }
+.tex-LARGE { font-size: xx-large; }
+.tex-huge { font-size: xx-large; }
+.tex-Huge { font-size: xx-large; }
+.tex-small { font-size: small; }
+.tex-footnotesize { font-size: x-small; }
+.tex-scriptsize { font-size: x-small; }
+.tex-tiny { font-size: xx-small; }
+.tex-emph { font-style: italic; }
+.tex-strong { font-weight: bold; }
+.tex-bf { font-weight: bold; }
+.tex-it { font-style: italic; }
+.tex-tt { font-family: monospace; }
+.tex-underline { text-decoration: underline; }
+.tex-sf { font: sans-serif; }
+.tex-sc { font-variant: small-caps; }
+.tex-center { text-align: center; }
+.tex-mbox { white-space: nowrap; }
+.tex-verbatim, .tex-example {
+  border-radius: 16px;
+  box-shadow: #387BBE 0px 0px 12px 0px;
+  padding: 1em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+dl.tex-description {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+dl.tex-description dt {
+  float: left;
+  clear: left;
+  color: green;
+  width: 200px;
+}
+dl.tex-description dd {
+  margin-left: 200px;
+  margin-right: 100px;
+}
+</style>
+
+</head>
+<body bgcolor="#ffffe6">
+<div data-role="page">
+<table width="100%" cellpadding=0 cellspacing=2><tr>
+    <td bgcolor="#99ccff"><a href="manual_37.html"><img border="0" alt="7.3 Chinese, Japanese, and Korean" src="next.png"></a></td><td bgcolor="#99ccff"><a href="manual_scripts.html"><img border="0" alt="7 Documents with text that is not in English" src="up.png"></a></td><td bgcolor="#99ccff"><a href="manual_35.html"><img border="0" alt="7.1 Pdflatex for latin and cyrillic scripts" src="previous.png"></a></td><td align="center" bgcolor="#99ccff" width="100%"><span class="tex-bf">7.2 Using Xetex</span></td></tr></table>
+<div data-role="content">
+<h2>7.2 Using Xetex</h2>
+
+<p>If you set the LaTeX engine to <code>xetex</code> (you set this in the
+<span class="tex-emph">Document properties</span> dialog, available on the <span class="tex-emph">Edit</span> menu),
+then Ipe will use Xelatex to convert your text objects to PDF.  Xetex
+supports Unicode natively, and will give you access to many scalable
+fonts on your system.
+<p>For instance, to use Thai in your Ipe document, it suffices to set the
+Latex engine to <code>xetex</code>, and to select a Thai font in the
+preamble:
+<pre class="tex-verbatim">
+\usepackage{fontspec}
+\setmainfont{Garuda}
+</pre>
+(On a Unix-system, you can determine which fonts on your system
+support Thai by saying <code>fc-list :lang=th</code> on the command line.)
+<p>Unfortunately, running Xetex is significantly slower than Pdflatex, so
+you may want to turn off the automatic running of LaTeX in the
+<span class="tex-emph">File</span> menu.
+<p>If your script uses right-to-left writing, you will need <a href="manual_38.html">some
+  more effort</a>.
+</div>
+</div></body></html>

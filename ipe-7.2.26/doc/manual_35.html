@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<!-- XML file produced from file: manual.tex
+     using Hyperlatex v 19.01 (c) Otfried Cheong
+     on Emacs 26.3, Sat Jul 16 15:56:45 2022 -->
+<head>
+<title>Ipe Manual -- 7.1 Pdflatex for latin and cyrillic scripts</title>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,
+    initial-scale=1" /><link rel="stylesheet" href="manual.css" />
+<style type="text/css">
+.tex-maketitle { text-align: center; }
+div.tex-abstract { margin-left: 20%; margin-right: 10%; }
+h3.tex-abstract  { text-align: center; }
+div.tex-verse, div.tex-quote, div.tex-quotation, div.tex-math {
+  margin-left : 10%; 
+  margin-right : 10%;
+}
+.tex-normalsize { font-size: medium; }
+.tex-large { font-size: large; }
+.tex-Large { font-size: x-large; }
+.tex-LARGE { font-size: xx-large; }
+.tex-huge { font-size: xx-large; }
+.tex-Huge { font-size: xx-large; }
+.tex-small { font-size: small; }
+.tex-footnotesize { font-size: x-small; }
+.tex-scriptsize { font-size: x-small; }
+.tex-tiny { font-size: xx-small; }
+.tex-emph { font-style: italic; }
+.tex-strong { font-weight: bold; }
+.tex-bf { font-weight: bold; }
+.tex-it { font-style: italic; }
+.tex-tt { font-family: monospace; }
+.tex-underline { text-decoration: underline; }
+.tex-sf { font: sans-serif; }
+.tex-sc { font-variant: small-caps; }
+.tex-center { text-align: center; }
+.tex-mbox { white-space: nowrap; }
+.tex-verbatim, .tex-example {
+  border-radius: 16px;
+  box-shadow: #387BBE 0px 0px 12px 0px;
+  padding: 1em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+dl.tex-description {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+dl.tex-description dt {
+  float: left;
+  clear: left;
+  color: green;
+  width: 200px;
+}
+dl.tex-description dd {
+  margin-left: 200px;
+  margin-right: 100px;
+}
+</style>
+
+</head>
+<body bgcolor="#ffffe6">
+<div data-role="page">
+<table width="100%" cellpadding=0 cellspacing=2><tr>
+    <td bgcolor="#99ccff"><a href="manual_36.html"><img border="0" alt="7.2 Using Xetex" src="next.png"></a></td><td bgcolor="#99ccff"><a href="manual_scripts.html"><img border="0" alt="7 Documents with text that is not in English" src="up.png"></a></td><td bgcolor="#99ccff"><img alt="" src="blank.png"></td><td align="center" bgcolor="#99ccff" width="100%"><span class="tex-bf">7.1 Pdflatex for latin and cyrillic scripts</span></td></tr></table>
+<div data-role="content">
+<h2>7.1 Pdflatex for latin and cyrillic scripts</h2>
+
+<p>An easy solution, sufficient for German, French, and other languages
+for which support is already in a standard LaTeX-setup, is to add
+the line
+<pre class="tex-verbatim">
+\usepackage[utf8]{inputenc}
+</pre>
+in your <span class="tex-emph">Latex preamble</span> (set in the <span class="tex-emph">Document properties</span>
+dialog, available on the <span class="tex-emph">Edit</span> menu).
+<p>In addition, you may need to setup your document language. So, to use
+UTF-8 encoded Russian in LaTeX, your preamble would look like this:
+<pre class="tex-verbatim">
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+</pre>
+When setting this up, you have to keep in mind that Ipe can only
+handle scalable fonts, such as Postscript Type1 fonts.  You'll have to
+choose a setup that uses such scalable fonts.  Quite often it is
+sufficient to install the package <code>cm-super</code>, which contains
+Type1 versions of standard fonts.
+<p>If your LaTeX setup does not contain scalable fonts for your
+document, it will often fall back on Metafont fonts in bitmapped Type3
+format.  Ipe will show an error message informing you about Type3
+fonts in your LaTeX output.  In that case, try installing
+<code>cm-super</code>, or use a package that explicitly uses Postscript
+fonts.  For instance, for Russian you could install the <span class="tex-emph">PsCyr</span>
+package, and the following preamble:
+<pre class="tex-verbatim">
+\usepackage[utf8]{inputenc}
+\usepackage[russian]{babel}
+\usepackage{pscyr}
+</pre>
+</div>
+</div></body></html>

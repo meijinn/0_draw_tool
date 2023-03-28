@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html>
+<!-- XML file produced from file: manual.tex
+     using Hyperlatex v 19.01 (c) Otfried Cheong
+     on Emacs 26.3, Sat Jul 16 15:56:45 2022 -->
+<head>
+<title>Ipe Manual -- 7.4 Right-to-left writing: Farsi, Hebrew, and Arabic</title>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,
+    initial-scale=1" /><link rel="stylesheet" href="manual.css" />
+<style type="text/css">
+.tex-maketitle { text-align: center; }
+div.tex-abstract { margin-left: 20%; margin-right: 10%; }
+h3.tex-abstract  { text-align: center; }
+div.tex-verse, div.tex-quote, div.tex-quotation, div.tex-math {
+  margin-left : 10%; 
+  margin-right : 10%;
+}
+.tex-normalsize { font-size: medium; }
+.tex-large { font-size: large; }
+.tex-Large { font-size: x-large; }
+.tex-LARGE { font-size: xx-large; }
+.tex-huge { font-size: xx-large; }
+.tex-Huge { font-size: xx-large; }
+.tex-small { font-size: small; }
+.tex-footnotesize { font-size: x-small; }
+.tex-scriptsize { font-size: x-small; }
+.tex-tiny { font-size: xx-small; }
+.tex-emph { font-style: italic; }
+.tex-strong { font-weight: bold; }
+.tex-bf { font-weight: bold; }
+.tex-it { font-style: italic; }
+.tex-tt { font-family: monospace; }
+.tex-underline { text-decoration: underline; }
+.tex-sf { font: sans-serif; }
+.tex-sc { font-variant: small-caps; }
+.tex-center { text-align: center; }
+.tex-mbox { white-space: nowrap; }
+.tex-verbatim, .tex-example {
+  border-radius: 16px;
+  box-shadow: #387BBE 0px 0px 12px 0px;
+  padding: 1em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+dl.tex-description {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+dl.tex-description dt {
+  float: left;
+  clear: left;
+  color: green;
+  width: 200px;
+}
+dl.tex-description dd {
+  margin-left: 200px;
+  margin-right: 100px;
+}
+</style>
+
+</head>
+<body bgcolor="#ffffe6">
+<div data-role="page">
+<table width="100%" cellpadding=0 cellspacing=2><tr>
+    <td bgcolor="#99ccff"><img alt="" src="blank.png"></td><td bgcolor="#99ccff"><a href="manual_scripts.html"><img border="0" alt="7 Documents with text that is not in English" src="up.png"></a></td><td bgcolor="#99ccff"><a href="manual_37.html"><img border="0" alt="7.3 Chinese, Japanese, and Korean" src="previous.png"></a></td><td align="center" bgcolor="#99ccff" width="100%"><span class="tex-bf">7.4 Right-to-left writing: Farsi, Hebrew, and Arabic</span></td></tr></table>
+<div data-role="content">
+<h2>7.4 Right-to-left writing: Farsi, Hebrew, and Arabic</h2>
+
+
+
+<p>Scripts with right-to-left writing require some extra care.  The main
+document needs to be processed left-to-right for Ipe to work
+correctly.  Only individual text objects can be translated using
+right-to-left mode.
+<p>Here are solutions that work for Farsi (Persian),  Hebrew, and
+Arabic.
+
+<h3 id="id1">7.4.1 Persian</h3>
+<p>Include the stylesheet <span class="tex-emph">right-to-left.isy</span> from the Ipe
+stylesheet folder.  It defines a text style <code>rtl</code> for
+right-to-left text objects.
+<p>In the document properties (that is, in the <span class="tex-emph">Document properties</span>
+dialog, available on the <span class="tex-emph">Edit</span> menu), set <code>Latex engine</code> to
+<code>xetex</code>, and the <code>Latex preamble</code> to
+<pre class="tex-verbatim">
+\usepackage[documentdirection=lefttoright]{xepersian}
+\settextfont{FreeFarsi}
+</pre>
+I needed to install the packages <code>texlive-lang-arabic</code> and
+<code>fonts-freefarsi</code> on my Linux system to use this.  On a
+Unix-system, you can determine which fonts on your system support
+Farsi by saying <code>fc-list :lang=fa</code> on the command line.
+<p>It is important to set the option <code>documentdirection=lefttoright</code>
+for the <span class="tex-emph">xepersian</span> package, to make sure the main document is
+processed in left-to-right mode.
+<p>You can now have text objects with Latin script using the
+<code>normal</code> text style, and text objects with Persian script using
+the <code>rtl</code> text style.
+<p>If you want, you can make <code>rtl</code> the default text style, with the
+following <a href="manual_customize.html">customization</a>:
+<pre class="tex-verbatim">
+prefs.initial_attributes.textstyle = "rtl"
+</pre>
+<p>If you do not use the <span class="tex-emph">right-to-left.isy</span> stylesheet, then you
+have to put one more line in the preamble:
+<pre class="tex-verbatim">
+\ipedefinecolors{}
+\usepackage[documentdirection=lefttoright]{xepersian}
+\settextfont{FreeFarsi}
+</pre>
+This is necessary, because Ipe normally loads the <code>xcolors</code>
+package after processing the document preamble.  Some packages (like
+<code>bidi</code> and <code>xepersian</code>) require to be loaded <span class="tex-emph">after</span>
+<code>xcolors</code>, so you need to use <code>\ipedefinecolors{}</code> to load
+<code>xcolors</code> early.  We didn't need this above, because the
+stylesheet <span class="tex-emph">right-to-left.isy</span> already contains the command.
+
+<h3 id="id2">7.4.2 Hebrew</h3>
+<p>Include the stylesheet <span class="tex-emph">right-to-left.isy</span> from the Ipe
+stylesheet folder.  It defines a text style <code>rtl</code> for
+right-to-left text objects.
+<p>In the document properties (that is, in the <span class="tex-emph">Document properties</span>
+dialog, available on the <span class="tex-emph">Edit</span> menu), set <code>Latex engine</code> to
+<code>xetex</code>, and the <code>Latex preamble</code> to
+<pre class="tex-verbatim">
+\ipedefinecolors{}
+\usepackage{fontspec}
+\setmainfont{Liberation Serif}
+\setmonofont{Liberation Mono}
+\setsansfont{Liberation Sans}
+\usepackage{bidi}
+</pre>
+I needed to install the package <code>texlive-lang-arabic</code> to use the
+<code>bidi</code> package.  On a Unix-system, you can determine which fonts
+on your system support Hebrew by saying <code>fc-list :lang=he</code> on the
+command line.
+<p>You can now have text objects with Latin script using the
+<code>normal</code> text style, and text objects in Hebrew using the
+<code>rtl</code> text style.
+<p>If you want, you can make <code>rtl</code> the default text style, with the
+following <a href="manual_customize.html">customization</a>:
+<pre class="tex-verbatim">
+prefs.initial_attributes.textstyle = "rtl"
+</pre>
+
+<h3 id="id3">7.4.3 Arabic</h3>
+<p>In the document properties (that is, in the <span class="tex-emph">Document properties</span>
+dialog, available on the <span class="tex-emph">Edit</span> menu), set <code>Latex engine</code> to
+<code>luatex</code>, and the <code>Latex preamble</code> to
+<pre class="tex-verbatim">
+\usepackage{arabluatex}
+</pre>
+<p>If you don't want to use the standard Amiri font, select another font
+in the preamble:
+<pre class="tex-verbatim">
+\newfontfamily\arabicfont[Script=Arabic]{KacstLetter}
+</pre>
+On a Unix-system, you can list the fonts on your system supporting
+Arabic by saying <code>fc-list :lang=ar</code> on the command line.
+<p>You can now create text objects in Arabic using the macro <code>\arb</code>
+and the environment <code>arab</code>.
+<p>The following stylesheet <span class="tex-emph">arabic.isy</span> makes this more
+comfortable:
+<pre class="tex-verbatim">
+&lt;ipestyle name="arabic"&gt;
+&lt;textstyle name="arabic" type="minipage" begin="\begin{arab}" end="\end{arab}"/&gt;
+&lt;textstyle name="arabic" type="label" begin="\arb{" end="}"/&gt;
+&lt;/ipestyle&gt;
+</pre>
+If you add this stylesheet to your document, you can select the
+<code>arabic</code> style for text objects, and directly write in Arabic
+inside these objects.
+<p>If you want, you can make <code>arabic</code> the default text style, with the
+following <a href="manual_customize.html">customization</a>:
+<pre class="tex-verbatim">
+prefs.initial_attributes.textstyle = "arabic"
+</pre>
+
+
+</div>
+</div></body></html>

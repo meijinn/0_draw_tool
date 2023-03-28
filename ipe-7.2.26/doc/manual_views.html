@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+<!-- XML file produced from file: manual.tex
+     using Hyperlatex v 19.01 (c) Otfried Cheong
+     on Emacs 26.3, Sat Jul 16 15:56:45 2022 -->
+<head>
+<title>Ipe Manual -- 8.2 Views</title>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,
+    initial-scale=1" /><link rel="stylesheet" href="manual.css" />
+<style type="text/css">
+.tex-maketitle { text-align: center; }
+div.tex-abstract { margin-left: 20%; margin-right: 10%; }
+h3.tex-abstract  { text-align: center; }
+div.tex-verse, div.tex-quote, div.tex-quotation, div.tex-math {
+  margin-left : 10%; 
+  margin-right : 10%;
+}
+.tex-normalsize { font-size: medium; }
+.tex-large { font-size: large; }
+.tex-Large { font-size: x-large; }
+.tex-LARGE { font-size: xx-large; }
+.tex-huge { font-size: xx-large; }
+.tex-Huge { font-size: xx-large; }
+.tex-small { font-size: small; }
+.tex-footnotesize { font-size: x-small; }
+.tex-scriptsize { font-size: x-small; }
+.tex-tiny { font-size: xx-small; }
+.tex-emph { font-style: italic; }
+.tex-strong { font-weight: bold; }
+.tex-bf { font-weight: bold; }
+.tex-it { font-style: italic; }
+.tex-tt { font-family: monospace; }
+.tex-underline { text-decoration: underline; }
+.tex-sf { font: sans-serif; }
+.tex-sc { font-variant: small-caps; }
+.tex-center { text-align: center; }
+.tex-mbox { white-space: nowrap; }
+.tex-verbatim, .tex-example {
+  border-radius: 16px;
+  box-shadow: #387BBE 0px 0px 12px 0px;
+  padding: 1em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+dl.tex-description {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+dl.tex-description dt {
+  float: left;
+  clear: left;
+  color: green;
+  width: 200px;
+}
+dl.tex-description dd {
+  margin-left: 200px;
+  margin-right: 100px;
+}
+</style>
+
+</head>
+<body bgcolor="#ffffe6">
+<div data-role="page">
+<table width="100%" cellpadding=0 cellspacing=2><tr>
+    <td bgcolor="#99ccff"><a href="manual_42.html"><img border="0" alt="8.3 Bookmarks" src="next.png"></a></td><td bgcolor="#99ccff"><a href="manual_presentations.html"><img border="0" alt="8 Presentations" src="up.png"></a></td><td bgcolor="#99ccff"><a href="manual_40.html"><img border="0" alt="8.1 Presentation stylesheets" src="previous.png"></a></td><td align="center" bgcolor="#99ccff" width="100%"><span class="tex-bf">8.2 Views</span></td></tr></table>
+<div data-role="content">
+<h2>8.2 Views</h2>
+
+<p>When making a PDF presentation for a PDF Viewer or for IpePresenter,
+one would often like to present a page incrementally. For instance, I
+would first like to show a polygon, then add its triangulation, and
+finally color the vertices.  <span class="tex-emph">Views</span> make it possible to do this
+nicely.
+<p>An Ipe document consists of several pages, each of which can consist
+of an arbitrary number of views.  When saving as PDF, each view
+generates a separate PDF page (if you only look at the result in a PDF
+viewer, you cannot tell whether two pages are actually two views of
+the same Ipe page or two different Ipe pages).
+<p>An Ipe page consists of a number of objects, a number of layers, and a
+number of views.  Each object belongs to exactly one layer.  A layer
+can be shown by any number of views&mdash;a view is really just a list of
+layers to be presented. In addition, a view keeps a record of the
+current active layer&mdash;this makes it easy to move around your views
+and edit them.
+<p>Views can also give a different meaning to symbolic attributes, so
+that objects that appear in blue on one view will be red on the next
+one.  One can also change the dash pattern and pen width, and can even
+replace one symbol by a different one.
+<p>As a somewhat experimental feature, views can transform individual
+layers of the page.  This allows you to move around or rotate objects
+from view to view, without having to make copies of the objects.
+<p>Finally, views can specify a graphic effect to be used by the PDF
+viewer when proceeding to the following PDF page.
+
+<h3 id="id1">8.2.1 Example</h3>
+<p>To return to our polygon triangulation example, let's create an empty
+page.  We draw a polygon into the default layer "alpha."  Now use
+the <span class="tex-emph">New layer, new view</span> function (in the <span class="tex-emph">Views</span> menu),
+and draw the triangulation into the new layer "beta."  Note that the
+function not only created a new layer, but also a second view showing
+both "alpha" and "beta".  Try moving back and forth between the
+two views (using the PageUp and PageDown keys). You'll see changes in
+the layer list on the left: in view&nbsp;1, layer "alpha" is selected and
+active, in view&nbsp;2, both layers are selected and "beta" is active.
+Create a third layer and view, and mark the vertices.  
+<p>Save in PDF format, and voila, you have a lovely little presentation.
+The result is available <a href="polygon.pdf">here</a>.
+
+<h3 id="id2">8.2.2 Text boxes</h3>
+<p>In presentations, one often has slides with mostly text.  The
+<a href="manual_17.html">textbox</a> object is convenient for this, as one
+doesn't need to use the mouse to create it.  To create a slide where
+several text items appear one by one, one only needs to press F10 to
+create a textbox, then <font color="#0000ff">Shift+Ctrl+I</font> to make a new view, F10
+again for the next textbox, and so on.  Finally, one moves the
+textboxes vertically for the most pleasing effect
+(<span class="tex-emph">Shift+Alt+Left Mouse</span> does a constrained vertical translation,
+or <span class="tex-emph">Shift+Left Mouse</span> in <span class="tex-emph">Translate</span> mode).
+
+<h3 id="id3">8.2.3 Changing symbolic values inside a view</h3>
+<p>Imagine you have an object that is shown in dark orange on your
+current page, but on one specific view you want to highlight the
+object in purple.
+<p>To achieve this, go to the view, and open <span class="tex-emph">Edit view</span> from the
+<span class="tex-emph">Views</span> menu.  In the attribute map field, write this line:
+<pre class="tex-verbatim">
+color:darkorange=purple;
+</pre>
+You will notice that all objects on the page that had the
+<code>darkorange</code> color now show in purple.
+<p>You can similarly map other attribute values, for instance:
+<pre class="tex-verbatim">
+color:navy=red;
+color:darkorange=purple;
+symbolsize:large=tiny;
+pen:ultrafat=normal;
+dashstyle:dotted=dashed;
+symbol:mark/disk(sx)=mark/box(sx);
+</pre>
+The attribute kinds you are allowed to modify are "pen", "symbolsize",
+"arrowsize", "opacity", "color", "dashstyle", and "symbol".  Both the
+original and the new attribute must by symbolic attributes defined in
+your style sheet.
+<p>It's probably not a good idea to remap common attributes in your
+document&mdash;this may quickly become confusing.  A better approach would
+be to create dedicated attribute values like <code>emphasis</code>, that
+map to some standard value in the stylesheet, and which you can then
+redefine in the views where you want to emphasize the object.
+
+<h3 id="id4">8.2.4 Transforming objects inside a view</h3>
+<p>The second large text field inside the <span class="tex-emph">Edit view</span> dialog allows
+you to specify transformations for each layer of the page.  For
+instance, you could write these definitions:
+<pre class="tex-verbatim">
+alpha=[1 0 0 1 20 100];
+beta=[1 0 0 0.8 0 0];
+</pre>
+This will translate all objects in layer alpha by the vector&nbsp;<i>(20,
+100)</i> (that is, 20&nbsp;units to the right and 100&nbsp;units upwards), while
+all objects in layer beta are scaled in the <i>y</i>-direction by
+factor&nbsp;<i>0.8</i>.
+<p>This is somewhat experimental&mdash;there is no good UI to figure out the
+right transformation matrices (you may want to draw a helper object,
+apply the transformation, and then use <span class="tex-emph">Edit as XML</span> to look at
+the object's matrix field).
+<p>Also, Ipe still considers the objects to be at their original place,
+it just displays them elsewhere.  For instance, to modify an object
+you have to select it by clicking at its original location. (So, to
+modify an object, it is best is to go back to the original view where
+you made the object.)
+<p>Currently, the layer transformation is not taken into account when
+computing the bounding box of a page, so make sure you have other
+objects creating a suitable bounding box.
+
+<h3 id="id5">8.2.5 Controlling the PDF bounding box of a view</h3>
+<p>Note that all views of a page receive the same bounding box,
+containing all objects visible on some view, plus all objects in a
+layer named "BBOX" (even if that layer is not visible).  This can be
+used to force a larger bounding box without adding a white rectangle
+or the like.
+<p>If you need independent bounding boxes for each view, create a layer
+named "VIEWBBOX".  Any view in which this layer is visible will
+receive a bounding box computed for the objects visible in this view
+only.
+</div>
+</div></body></html>

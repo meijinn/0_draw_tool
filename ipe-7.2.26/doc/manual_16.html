@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html>
+<!-- XML file produced from file: manual.tex
+     using Hyperlatex v 19.01 (c) Otfried Cheong
+     on Emacs 26.3, Sat Jul 16 15:56:45 2022 -->
+<head>
+<title>Ipe Manual -- 4.1 Path objects</title>
+<meta charset="UTF-8" /><meta name="viewport" content="width=device-width,
+    initial-scale=1" /><link rel="stylesheet" href="manual.css" />
+<style type="text/css">
+.tex-maketitle { text-align: center; }
+div.tex-abstract { margin-left: 20%; margin-right: 10%; }
+h3.tex-abstract  { text-align: center; }
+div.tex-verse, div.tex-quote, div.tex-quotation, div.tex-math {
+  margin-left : 10%; 
+  margin-right : 10%;
+}
+.tex-normalsize { font-size: medium; }
+.tex-large { font-size: large; }
+.tex-Large { font-size: x-large; }
+.tex-LARGE { font-size: xx-large; }
+.tex-huge { font-size: xx-large; }
+.tex-Huge { font-size: xx-large; }
+.tex-small { font-size: small; }
+.tex-footnotesize { font-size: x-small; }
+.tex-scriptsize { font-size: x-small; }
+.tex-tiny { font-size: xx-small; }
+.tex-emph { font-style: italic; }
+.tex-strong { font-weight: bold; }
+.tex-bf { font-weight: bold; }
+.tex-it { font-style: italic; }
+.tex-tt { font-family: monospace; }
+.tex-underline { text-decoration: underline; }
+.tex-sf { font: sans-serif; }
+.tex-sc { font-variant: small-caps; }
+.tex-center { text-align: center; }
+.tex-mbox { white-space: nowrap; }
+.tex-verbatim, .tex-example {
+  border-radius: 16px;
+  box-shadow: #387BBE 0px 0px 12px 0px;
+  padding: 1em 1em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+dl.tex-description {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+dl.tex-description dt {
+  float: left;
+  clear: left;
+  color: green;
+  width: 200px;
+}
+dl.tex-description dd {
+  margin-left: 200px;
+  margin-right: 100px;
+}
+</style>
+
+</head>
+<body bgcolor="#ffffe6">
+<div data-role="page">
+<table width="100%" cellpadding=0 cellspacing=2><tr>
+    <td bgcolor="#99ccff"><a href="manual_17.html"><img border="0" alt="4.2 Text objects" src="next.png"></a></td><td bgcolor="#99ccff"><a href="manual_15.html"><img border="0" alt="4 Object types" src="up.png"></a></td><td bgcolor="#99ccff"><img alt="" src="blank.png"></td><td align="center" bgcolor="#99ccff" width="100%"><span class="tex-bf">4.1 Path objects</span></td></tr></table>
+<div data-role="content">
+<h2>4.1 Path objects</h2>
+
+
+Path objects are defined by a set of <span class="tex-emph">subpaths</span>, that is, curves
+in the plane.  Each subpath is either open or closed, and consists of
+straight line segments, circular or elliptic arc segments, parabola
+segments (or, equivalently, quadratic B&eacute;zier splines), cubic B&eacute;zier splines, and cubic B-spline segments.  The curves are drawn with the
+stroke color, dash style, and line width; the interior of the object
+specified is filled using the fill color.
+<p>The distinction between open and closed subpaths is meaningful for
+stroking only, for filling any open subpath is implicitely closed.
+Stroking a set of subpaths is identical to stroking them individually.
+This is not true for filling: using several subpaths, one can
+construct objects with holes, and more complicated pattern.  The
+filling algorithm is normally the <span class="tex-emph">even-odd rule</span> of
+Postscript/PDF: To determine whether a point lies inside the filled
+shape, draw a ray from that point in any direction, and count the
+number of path segments that cross the ray.  If this number is odd,
+the point is inside; if even, the point is outside.
+<p>Ipe can draw arrows on the first and last segment of a path object,
+but only if that segment is part of an open subpath.
+<p>There are several Ipe modes that create path objects in different
+ways.  All modes create an object consisting of a single subpath only.
+To make more complicated path objects, such as objects with holes, you
+create each boundary component separately, then select them all and
+use the <span class="tex-emph">Compose paths</span> function in the <span class="tex-emph">Edit</span> menu.  The
+reverse operation is <span class="tex-emph">Decompose path</span>, you find it in the context
+menu of a path object that has several subpaths.
+<p>You can also create complicated paths by joining curves sequentially.
+For this to work, the endpoint of one path must be (nearly) identical
+to the begin point of the next&mdash;easy to achieve using snapping.  You
+select the path objects you wish to join, and call <span class="tex-emph">Join paths</span>
+in the <span class="tex-emph">Edit</span> menu.  You can also join several open path objects
+into a single closed path this way.
+<p><span id="id1">  
+Circles</span> can be entered in three different ways.  To create an ellipse,
+create a circle and shear or stretch and rotate it.  Circular arcs can
+be entered by clicking three points on the arc or by clicking the
+center of the supporting circle as well as the begin and end vertex of
+the arc. They can be filled in Postscript/PDF fashion, and can have
+arrows. You can stretch a circular arc to create an elliptic arc.
+<p>A common application for arcs is to mark angles in drawings. The snap
+keys are useful to create such arcs: set arc creation to <span class="tex-emph">center
+&#38; 2 pts</span>, select <span class="tex-emph">snap to vertex</span> and <span class="tex-emph">snap to boundary</span>,
+click first on the center point of the angle (which is magnetic) and
+click then on the two bounding lines.
+<p><span id="id2">
+
+
+
+
+
+
+
+
+
+There</span> are two modes for creating more complex general path objects.
+The difference between <span class="tex-emph">line</span> mode and <span class="tex-emph">polygon</span> mode is
+that the first creates an open path, the latter generates a closed
+one.  As a consequence, the <span class="tex-emph">line</span> mode uses the current arrow
+settings, while the <span class="tex-emph">polygon</span> mode doesn't.
+The path object created using line or polygon mode consists of
+segments of various types.  The initial setting is to create straight
+segments. By holding the shift-key when pressing the left mouse button
+one can switch to splines.  Ipe offers three different kinds of
+splines: uniform B-splines, cardinal splines, and clothoid splines.
+You can select the type of spline in the <span class="tex-emph">Properties</span> menu.
+Quadratic and cubic B&eacute;zier spline segments can be created as special
+cases of uniform B-splines with three and four control points.
+<p>Circular arcs can be added as follows: Click twice in polyline mode,
+once on the starting point of the arc, then on a point in the correct
+tangent direction.  Press the <font color="#0000ff">a</font> key, and click on the endpoint
+of the arc.
+<p>To make curves where segments of different type are joined with
+identical tangents, you can press the <font color="#0000ff">y</font> key whenever you are
+starting a new segment: this will set the coordinate system centered
+at the starting point of the segment, and aligned with the tangent to
+the previous segment. 
+<p>For the mathematically inclined, a more precise description of the
+segments that can appear on a subpath follows.
+<p>A subpath consists of a sequence of segments.  Each segment is either
+a straight line segment, an elliptic arc, or a spline of one of the
+three supported types.
+<p>Note that a uniform B-spline with only three control points will be
+drawn as a <span class="tex-emph">quadratic</span> B&eacute;zier spline.  A B-spline with four
+control points is by definition a cubic B&eacute;zier spline.
+<p>The quadratic B&eacute;zier spline defined by control points <i>p<sub>0</sub></i>,
+<i>p<sub>1</sub></i>, and <i>p<sub>2</sub></i>, is the curve
+<div class="tex-math"><i>
+P(t) = (1-t)<sup>2</sup> p<sub>0</sub> + 2t(1-t) p<sub>1</sub> + t<sup>2</sup> p<sub>2</sub>,
+</i></div>
+where&nbsp;<i>t</i> ranges from <i>0</i> to <i>1</i>. This implies that it starts in
+<i>p<sub>0</sub></i> tangent to the line <i>p<sub>0</sub>p<sub>1</sub></i>, ends in <i>p<sub>2</sub></i> tangent to
+the line <i>p<sub>1</sub>p<sub>2</sub></i>, and is contained in the convex hull of the
+three points.  Any segment of any parabola can be expressed as a
+quadratic B&eacute;zier spline.
+<p>For instance, the piece of the unit parabola <i>y = x<sup>2</sup></i> between <i>x=a</i>
+and <i>x=b</i> can be created with the control points
+<blockquote><table border><tbody><tr><td colspan="1" align="left">
+<i>
+p<sub>0</sub> </td><td colspan="1" align="center"> = </td><td colspan="1" align="left"> (a, a<sup>2</sup>)</td></tr>
+<tr><td colspan="1" align="left">
+p<sub>1</sub> </td><td colspan="1" align="center"> = </td><td colspan="1" align="left"> ( (a + b)/(2), ab) </td></tr>
+<tr><td colspan="1" align="left">
+p<sub>2</sub> </td><td colspan="1" align="center"> = </td><td colspan="1" align="left"> (b, b<sup>2</sup>)
+</i></td></tr></tbody></table>
+</blockquote>
+Any piece of any parabola can be created by applying some affine
+transformation to these points.
+<p>The cubic B&eacute;zier spline with control points <i>p<sub>0</sub></i>, <i>p<sub>1</sub></i>,
+ <i>p<sub>2</sub></i>, and <i>p<sub>3</sub></i> is the curve
+<div class="tex-math"><i>
+R(t) = (1-t)<sup>3</sup>p<sub>0</sub> + 3t(1-t)<sup>2</sup> p<sub>1</sub> + 
+3 t<sup>2</sup>(1-t) p<sub>2</sub> + t<sup>3</sup> p<sub>3</sub>.
+</i></div>
+It starts in <i>p<sub>0</sub></i> being tangent to the line <i>p<sub>0</sub>p<sub>1</sub></i>, ends in
+<i>p<sub>3</sub></i> being tangent to the line <i>p<sub>2</sub>p<sub>3</sub></i>, and lies in the convex
+hull of the four control points.
+<p>Uniform cubic B-splines approximate a series of <i>n</i> control points
+<i>p<sub>0</sub></i>, <i>p<sub>1</sub></i>, &hellip;, <i>p<sub>n-1</sub></i>, <i>n  &ge; 3</i>, with a curve
+consisting of <i>n-3</i> cubic B&eacute;zier splines, see, for instance,
+Sederberg.<sup><a href="manual_74.html#id1">1</a></sup>  To clamp the spline to the first and last control
+point, the first and last knot are repeated three times.  If the curve
+is closed (a <span class="tex-emph">splinegon</span>), there is no clamping and <i>n</i> control
+points define&nbsp;<i>n</i> B&eacute;zier splines.
+<p>Since each point on a B&eacute;zier curve is a convex combination of the
+four control points, the curve segment lies in the convex hull of the
+control points. Furthermore, any affine transformation can be applied
+to the curve by applying it to the control points.  Note that a
+control point has influence on only a few B&eacute;zier segments, so when
+you edit a spline object and move a control point, only a short piece
+of the spline in the neighborhood of the control point will move.
+<p>A <span class="tex-emph">cardinal spline</span> is an <span class="tex-emph">interpolating spline</span>&mdash;unlike a
+uniform B-spline, it will go <span class="tex-emph">through</span> the control points.  Ipe
+converts a sequence of&nbsp;<i>n</i> control points into&nbsp;<i>n-1</i> B&eacute;zier segments,
+each starting and ending at a control point.  The tangent at each
+control point is parallel to the segment connecting the previous and
+the next control point.
+<p>Finally, a <span class="tex-emph">clothoid spline</span> (spline type "spiro") is 
+created by solving an optimization problem that tries to minimize the
+change in curvature (so they look much "rounder" and are generally
+more pleasing).  Details can be found in <a href="http://levien.com">Raph Levien's
+  thesis</a>.
+
+</div>
+</div></body></html>
